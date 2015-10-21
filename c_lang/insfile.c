@@ -1,3 +1,14 @@
+/**
+ * 表结构
+ * mysql> desc t_file;
+ +---------+----------+------+-----+---------+----------------+
+ | Field   | Type     | Null | Key | Default | Extra          |
+ +---------+----------+------+-----+---------+----------------+
+ | id      | int(11)  | NO   | PRI | NULL    | auto_increment |
+ | filebuf | longblob | YES  |     | NULL    |                |
+ +---------+----------+------+-----+---------+----------------+
+ *
+ */
 
 #include <mysql/mysql.h>
 #include <stdio.h>
@@ -6,7 +17,9 @@
 
 #define INSERT_SQL "INSERT INTO t_file VALUES (null,?)"
 
+//文件大小
 static int size;
+//文件流
 static char *buf;
 
 static int insert_file(MYSQL*);
@@ -39,7 +52,7 @@ int main(int argc, char *argv[]){
 
 	printf("size:%d\n",size);
 
-	//初始化
+	//mysql初始化
 	conn = mysql_init(NULL);
 	if (conn == NULL) {
 		printf("Error %u: %s\n", mysql_errno(conn), mysql_error(conn));
